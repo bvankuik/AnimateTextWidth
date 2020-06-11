@@ -8,21 +8,27 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct AnimatedText: View {
     @State private var animate = false
+    let textAnimation = Animation.default.delay(5)
+
     var body: some View {
         VStack(spacing: 30) {
             Text("Hello, World!")
                 .fixedSize()
-                .frame(width: self.animate ? 100 : 0, alignment: .leading).animation(.default)
+                .frame(width: self.animate ? 100 : 0, alignment: .leading)
+                .animation(Animation.easeInOut(duration: 3).delay(1))
                 .clipped()
-                .frame(maxWidth: .infinity)
             Button("Animate") {
-                withAnimation {
-                    self.animate.toggle()
-                }
+                self.animate.toggle()
             }
         }
+    }
+}
+
+struct ContentView: View {
+    var body: some View {
+        AnimatedText()
     }
 }
 
