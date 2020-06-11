@@ -9,8 +9,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var animate = false
     var body: some View {
-        Text("Hello, World!")
+        VStack(spacing: 30) {
+            Text("Hello, World!")
+                .fixedSize()
+                .frame(width: self.animate ? 100 : 0, alignment: .leading).animation(.default)
+                .clipped()
+                .frame(maxWidth: .infinity)
+            Button("Animate") {
+                withAnimation {
+                    self.animate.toggle()
+                }
+            }
+        }
     }
 }
 
